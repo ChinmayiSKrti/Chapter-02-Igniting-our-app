@@ -1,0 +1,131 @@
+1.props can be anything, not just id or class like fixed set of attributes for html tags
+Eg: React -> const heading1 = React.createElement("h1",{hello:"World"},"Heading 1"), not possible in html
+
+2.What is a bundler?
+-> Bundler is a tool which identifies the dependencies between the modules and graphs them,
+    then combines them to respect the dependency order
+    Examples: browserify, rollup.js, webpack, parcel, vite etc
+    Ref: https://youtu.be/3UWlufSzO4k
+
+3.Bundler used in create-react-app is webpack and Babel
+
+-------------------------------------"PARCEL IS A BEAST"----------------------------------------
+
+4.Why are we using parcel...as matter of fact - simply :)
+Configuration is minimum is for Parcel...but these days all other bundler config is also less...
+so let me just learn Parcel.
+
+5.What is Parcel at the end of the day?
+-> Its a package and we need package manager to install it, which is npm...but there is yarn also 
+    which we can use...but we'll just use npm for now
+    Fun fact: npm doesnt mean Node Package Manager...It just doesnt have a name...
+    It can be anything...like Namaste Package Manager :)
+
+6.npm init (npm init -y -> will skip questions...but lets face it...)
+
+7.npm install -D parcel -> We do not want parcel in production, we want it only on developer machine,
+hence we use that -D in our cmd so that it gets installed as dev dependencies in our machine.
+This cmd is equivalent to - npm install --save-dev parcel
+
+8.What is dependency in this context? 
+Dependencies means what all is our application dependent on...
+Eg: like parcel is a package which our application depends on for bundling...
+or any other packages that our application needs
+Note:
+^ - packages will update itself if there is an update in minor version change,
+~ - packages will update itself if there is an update in major version change,
+If neither ^ nor ~ - just use the exact version of package is what they all mean 
+
+9.package-lock.json:
+i)tells us exactly which version of what packages our application depend on unlike its in package.json
+i.e package-lock.json locks the exact version of packages used by our application
+ii)You never have to keep this file in your gitignore - Why? 
+Because our machine is just a simulated machine
+Actually our project runs on some server, 
+and we need the exact versions of all the packages used by your app on server too..
+So we need to put package-lock.json into git, 
+so that our server can pick this file from git and use it to run our application on server
+And there is integrety field which is the hash of the version, 
+which makes sure which version of package was running on my system is same on production
+
+10.On installing parcel node_modules got created
+So whats node_modules? - Its like database for our npm
+And there are other folders in node_modules on installing just parcel
+How did that come? they are dependencies of parcel 
+browserlist is one such dependency parcel uses to make our application compatible with
+older versions of browserlist
+
+11.should you add node_modules to git?
+No, because its very heavy, we dont want that heavy file
+Our package.json and package.json has sufficient info to recreate node_moduless on server
+So add node_modules to your gitignore
+
+12.Using cdn for getting react into ur project is bad practice - Why?
+We might have to keep updating cdn link if its version changes
+And its faster to fetch our packages from node_modules which is on our server
+(which we get installed on server with help of package.json and package-lock.json)
+than to fetch from cdn
+
+13.npx parcel index.html - npx mean execute using npm, index.html is starting point
+In terminal now you can see parcel has created mini server for us - http://localhost:1234
+
+14.never edit your node_modules and package-lock.json
+
+15.We can not import and export scripts, we can import and export modules,
+so need to explicitly mention the type="module" in html for App.js script tag 
+
+16.LiveServer
+HMR - Hot Module Reload - Parcel keeps track of all the files in your app
+and if there is any change in them it automatically updates it in Using
+
+17.How does Parcel get to know something has cahnges in my files?
+There is something known as File Watcher Algorithm(written is C++) which Parcel uses to 
+find the changes to reflect
+
+18.parcel-cache - parcel needs some space in our project, 
+parcel uses these files inside parcel-cache to do all the HMR etc
+When we did npx parcel index.html, parcel created a development bulid of our project and hosted it on a server
+When we did npx parcel build index.html it creates a production build
+dist folder will have minified files
+
+19.Heaviest things on website? - Media(Images..)
+Not node_modules as its not included in the production build
+
+20.Parcel does:
+->Created a server
+->HMR Hot Module Replacement
+->File Watcher Algorithm
+->Bundling
+->Minifying
+->Cleaning our code
+->Dev and production build
+->Super fast build algorithm
+->Image optimization
+->Caching while development
+->Compression - renames somethings
+->compatible with older versions of browsers - adds pollyfills
+->HTTPS on dev - npx parcel idex.html --https
+->port Number - create 2 projects,start development build in one window,
+start development build in another too,
+different port numbers are used for each
+->Consistant Hashing Algorithm is used to cache things up
+->Zero config
+->
+
+21.parcel-cache should be put in gitignore
+Because anything that be generated on server should be put in gitignore
+
+22.Transitive dependencies - parcel uses some other packages for doing something, 
+that packages intern uses other packages for something else
+
+23.browserlist - which will make our code compatible for many browsers 
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,88 @@
+1.What is npm?
+-> npm is package manager, its a library and registry for Javascript software packages
+
+2.What is Parcel/Webpack? Why do we need it?
+-> Parcel or Webpack is bundler which will minify, clean or compact your code,
+so that receiving from requesting to server becomes easier,
+whithout using bundler which might take you to do multiple file transfer
+to load a page of your application.
+
+3.What is parcel-cache?
+->parcel-cache is cache created by parcel when it builds our application,
+it stores information about our application,
+when it rebuilds it doesnt have to re-parse or re-analyze everything,
+so parcel is so fast in development mode.
+
+4.What is npx?
+->Its an npm package runner which will be installed along with npm if you installed npm above 5.2.0,
+It can execute any package from npm registry without even installing that package.
+
+5.What is difference between dependencies vs devDependencies?
+->dependencies are packages required by our application for production
+devDependencies are the packages required by our application for development and testing locally.
+
+6.What is Tree Shaking?
+->In production build, parcel analyzes the imports and exports of the modules and removes everything
+that is not used, this called "tree shaking" or "dead code elimination"
+
+7.What is Hot Module Replacement?
+->HMR updates the modules in the browser at runtime without needing a whole page refresh.
+This means application state can be retained as you change small things in your code.
+
+8.List down your favourite 5 superpowers of Parcel and describe any 3 of them in your own words
+->Hot Module Replacement, File Watcher Algorithm, Image Optimization, Cleaning our code, Caching while development
+i)File watcher algorithm: Parcel uses a very fast watcher written in C++ that integrates
+with file watching of operating system, using which Parcel watches every file in project root.
+Baed on events and metadata from these files Parcel determines which files need to be rebuilt.
+ii)Caching: Parcel caches everything it builds to disk.
+On restarting the server, Parcel will build only those files which has changed since last time it ran.
+By-default parcel stores its cache in .parcel-cache folder inside your project. 
+You should add this to gitignore.
+iii)Parcel does lossless image optimization for JPEGs adn PNGs by default in production mode,
+which reduces the size of images without affecting their quality.
+This does not require any query parameters or configuration to use.
+
+9.What is gitignore?What should we add and not add into it?
+->gitignore is file that specifies intentionally untracked files that Git should ignore.
+We should add, all those files which can be generated on the server, into this file.
+
+10.What is the difference between package.json and package-lock.json?
+->package.json: specifies the minimum version of packages your application needs, if you update the version of any package 
+the isnt reflected here
+package-lock.json: records exact version of each installed package which allows you to reinstall them.
+Ref: https://medium.com/dlt-labs-publication/package-json-vs-package-lock-json-c8d5deba12cb
+
+11.Why should I not modify package-lock.json?
+->package-lock.json file contains the exact version of pacakages required for our project,
+modifying it might result in varied result from the time when we developed(unexpected or undesirable result).
+So its recommended not to mofidy it.
+
+12.What is node_modules?Is it a good idea to push that on git?
+->node_modules can be thought of as a cache maintained to keep all the external packages used by our application.
+Node.js is trained to look for these packages inside node_modules,
+when we import those packages in any file in our app.
+
+13.What is the dist folder?
+->dist folder contains the minimized version of source code
+Code present in the dist folder is the actual code used in production web application.
+
+14.What is browserlists?
+->It is a tool that allows specify which browsers should be supported in your frontend app.
+Can be configured in package.json
+
+15.Read about different bundler:vite, webpack, parcel
+https://dev.to/adnanbabakan/comparison-webpack-or-parcel-which-one-is-better-43jo
+https://www.codecademy.com/article/comparison-of-build-tools
+
+16.Read about ^ - cater and ~ - tilda
+~ - will update to all future patch versions without updating minor version
+Eg:~1.2.3 = 1.2.3 to <1.3.0
+^ - will update to all future minor/patch versions without updating major version
+Eg:^2.3.4 = 2.3.4 to <3.0.0
+
+17.Read about Script types in html(MDN Docs)
+->script type attribute can have values: modules, importmap, blocking
+i)If the script is Javascript code, then its encouraged that we omit the type attribute to indicate the scrit as JS only
+ii)module: This value causes the code to be treated as a JavaScript module.
+Unlike classic scripts, module scripts require the use of the CORS protocol for cross-origin fetching
+Ref: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script
